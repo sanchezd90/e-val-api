@@ -16,7 +16,7 @@ const subjectSchema = mongoose.Schema({
         require: true,
         trim: true,        
     },
-    id:{
+    suject_id:{
         type: String,
         require: true,
         trim: true,
