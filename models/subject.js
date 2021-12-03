@@ -38,6 +38,10 @@ const subjectSchema = mongoose.Schema({
         type: String,
         require: true,
     },
+    deleted:{
+        type: String,
+        default: '0'
+    },
 
 });
 

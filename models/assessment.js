@@ -65,6 +65,10 @@ const assessmentSchema = mongoose.Schema({
         type: Date,
         default: Date.now()
     },
+    deleted:{
+        type: String,
+        default: '0'
+    },
 });
 
 module.exports = mongoose.model('assessment', assessmentSchema);
