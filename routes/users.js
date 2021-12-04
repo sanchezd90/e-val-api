@@ -4,17 +4,24 @@ const users = require('../controllers/users')
 const { check } = require('express-validator');
 const auth = require('../middleware/auth');
 
-router.post('/create',
-    [
-        check('username','Username is required').not().isEmpty(),
+router.post('/create',    
+    [        
+        check('email','Provide a valid email address').isEmail(),
+        check('pass','Your password must contain at least 6 characters').isLength({min:6}) 
+    ],
+    users.createUser
+)
+router.post('/signin',
+    [        
         check('email','Provide a valid email address').isEmail(),
         check('pass','Your password must contain at least 6 characters').isLength({min:6}) 
 
     ],
-    users.createUser
+    users.authUser
 )
 
 router.post('/verify/:uid',
+    auth,
     users.verifyEmail
 )
 

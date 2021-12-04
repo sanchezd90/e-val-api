@@ -12,7 +12,7 @@ router.post('/create',
     ],
     tests.create
 )
-router.get('/all',
+router.get('/all',        
     tests.getAll
 );
 router.get('/single/:id',

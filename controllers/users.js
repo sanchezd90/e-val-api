@@ -70,4 +70,35 @@ const verifyEmail = async(req, res) => {
     
 }
 
-module.exports = {createUser,verifyEmail}
+const authUser = async (req,res) => {    
+    const error = validationResult(req);
+    if (!error.isEmpty()) {
+        return res.status(400).json({errores: error.array()})
+    }
+
+    try{
+        let {email, pass} = req.body;                                 
+        let user = await User.findOne({email:email});                               
+        if (bcryptjs.compareSync(pass,user.pass)) {            
+            const payload = {
+                user:{
+                    id: user.id,
+                    role: user.role
+                }
+            }                                        
+            jwt.sign(payload,process.env.SECRETA,{
+                expiresIn: 3600
+            }, (error,token) => {
+                if (error) throw error;
+                res.json({token:token});            
+            })            
+        }else{
+            res.json({message:'Invalid user'});            
+        }          
+    } catch (error) {
+        console.log(error);
+        res.status(500).send("register error")        
+        }
+} 
+
+module.exports = {createUser,verifyEmail, authUser}

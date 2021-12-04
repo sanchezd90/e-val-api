@@ -1,4 +1,5 @@
 const express = require ('express');
+const cors = require("cors");
 const app = express();
 const connectDB = require('./services/db');
 
@@ -6,6 +7,14 @@ const dotenv = require('dotenv');
 dotenv.config();
 
 connectDB();
+
+const corsOptions ={
+    origin:'*', 
+    credentials:true,           
+    optionSuccessStatus:200,
+ }
+
+app.use(cors(corsOptions))
 
 app.use(express.json({ extended: true }));
 
