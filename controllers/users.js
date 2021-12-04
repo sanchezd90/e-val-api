@@ -30,10 +30,9 @@ const createUser = async (req,res) => {
         }
         send({
             mail : email, 
-            cuerpo:
-            `<h1> Welcome ${email}</h1>
-            Click on the following link to validate your email account:
-            <a href=${process.env.URL_SERVER}:${process.env.PORT}/users/verify/${uid}">Confirmación de correo</a>`,
+            body:
+            `<h1> Welcome to E-val!</h1>
+            Click <a href="http://${process.env.SERVER_URL}:${process.env.SERVER_PORT}/users/verify/${uid}">here</a> to validate your email account`,
             });        
         jwt.sign(payload,process.env.SECRETA,{
             expiresIn: 3600
@@ -50,6 +49,7 @@ const createUser = async (req,res) => {
 
 const verifyEmail = async(req, res) => {
     const {uid} = req.params;
+    console.log(uid);
     try{
         const match = await User.find({uid:uid},{_id:1});
         if (match) {

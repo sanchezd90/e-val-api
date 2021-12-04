@@ -4,7 +4,7 @@ const users = require('../controllers/users')
 const { check } = require('express-validator');
 const auth = require('../middleware/auth');
 
-router.post('/',
+router.post('/create',
     [
         check('username','Username is required').not().isEmpty(),
         check('email','Provide a valid email address').isEmail(),

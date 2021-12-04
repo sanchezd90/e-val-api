@@ -15,6 +15,11 @@ const userSchema = mongoose.Schema({
     uid:{
         type: String,        
     },
+    role:{
+        type: String,
+        enum : ['user','admin'],
+        default: 'user'       
+    },
     valid_email:{
         type: Boolean,                
         default: false,
