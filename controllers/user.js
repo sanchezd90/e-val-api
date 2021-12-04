@@ -2,8 +2,10 @@ const bcryptjs = require("bcryptjs");
 const { validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken')
 const User = require('../models/user')
+const {v4: uuid} = require('uuid');
+const { send } = require('./../services/mail')
 
-exports.createUser = async (req,res) => {    
+const createUser = async (req,res) => {    
     const error = validationResult(req);
     if (!error.isEmpty()) {
         return res.status(400).json({errores: error.array()})
@@ -17,13 +19,22 @@ exports.createUser = async (req,res) => {
         }        
         user = new User(req.body);        
         const salt = await bcryptjs.genSalt(10);
-        user.pass = await bcryptjs.hash(pass,salt);        
+        user.pass = await bcryptjs.hash(pass,salt);
+        const uid = uuid();
+        user.uid= uid;        
         await user.save()        
         const payload = {
             user:{
                 id: user.id,
             }
         }
+        send({
+            mail : email, 
+            cuerpo:
+            `<h1> Welcome ${email}</h1>
+            Click on the following link to validate your email account:
+            <a href=${process.env.URL_SERVER}:${process.env.PORT}/users/verify/${uid}">Confirmación de correo</a>`,
+            });        
         jwt.sign(payload,process.env.SECRETA,{
             expiresIn: 3600
         }, (error,token) => {
@@ -33,6 +44,30 @@ exports.createUser = async (req,res) => {
         
     } catch (error) {
         console.log(error);
-        res.status(400).send("register error")        
+        res.status(500).send("register error")        
         }
 } 
+
+const verifyEmail = async(req, res) => {
+    const {uid} = req.params;
+    try{
+        const match = await User.find({uid:uid},{_id:1});
+        if (match) {
+            try{
+                const response = await User.replaceOne({_id:response._id['$oid']},{valid_email:true});
+                if (response) {
+                    return res.status(400).json({message : 'User verified'})
+                }
+            } catch (error) {
+                console.log(error);
+                res.status(500).send("email verification error")  
+            }                                   
+        } 
+    } catch (error) {
+        console.log(error);
+        res.status(500).send("register error")    
+    }    
+    
+}
+
+module.exports = {createUser,verifyEmail}

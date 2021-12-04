@@ -12,6 +12,9 @@ const userSchema = mongoose.Schema({
         trim: true,
         unique:true,
     },
+    uid:{
+        type: String,        
+    },
     valid_email:{
         type: Boolean,                
         default: false,

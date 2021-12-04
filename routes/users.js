@@ -14,5 +14,9 @@ router.post('/',
     users.createUser
 )
 
+router.post('/verify/:uid',
+    users.verifyUser
+)
+
 module.exports = router;
 
