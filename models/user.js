@@ -12,6 +12,10 @@ const userSchema = mongoose.Schema({
         trim: true,
         unique:true,
     },
+    valid_email:{
+        type: Boolean,                
+        default: false,
+    },
     pass:{
         type: String,
         require: true,
