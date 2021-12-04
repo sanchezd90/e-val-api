@@ -3,7 +3,7 @@ const { validationResult } = require('express-validator');
 const jwt = require('jsonwebtoken')
 const User = require('../models/user')
 const {v4: uuid} = require('uuid');
-const { send } = require('./../services/mail')
+const { send } = require('../services/mail')
 
 const createUser = async (req,res) => {    
     const error = validationResult(req);

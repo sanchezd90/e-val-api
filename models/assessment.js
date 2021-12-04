@@ -1,5 +1,11 @@
 const mongoose = require('mongoose');
 
+const Task = mongoose.Schema({
+    answers: [String],
+    comments: String,
+    score: Number,
+})
+
 const administered_test = mongoose.Schema({
     test_name: {
         type: String,
@@ -24,11 +30,7 @@ const administered_test = mongoose.Schema({
     },
     tasks: {
         type: Map,
-        of: newSchema ({
-            answers: [String],
-            comments: String,
-            score: Number,            
-        })        
+        of: Task,        
     },
 })
 

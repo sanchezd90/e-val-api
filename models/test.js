@@ -3,9 +3,14 @@ const mongoose = require('mongoose');
 const Section = mongoose.Schema({
     instructions:{
         type: String,
+    }    
+})
 
-    },
-    scoring
+const Task = mongoose.Schema({
+    title: String,
+    domain: String,
+    general_instructions: String,
+    sections : [Section],
 })
 
 const Subscale = mongoose.Schema({
@@ -43,12 +48,7 @@ const Version = mongoose.Schema({
     },
     taskData:{
         type: Map,
-        of: newSchema ({
-            title: String,
-            domain: String,
-            general_instructions: String,
-            sections : [Section],
-        })
+        of: Task, 
     }
 })
 

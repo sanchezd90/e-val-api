@@ -15,7 +15,7 @@ router.post('/',
 )
 
 router.post('/verify/:uid',
-    users.verifyUser
+    users.verifyEmail
 )
 
 module.exports = router;
