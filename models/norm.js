@@ -20,11 +20,10 @@ const normSchema = mongoose.Schema({
     },
     age: {
         type: [[Number]],            
-    },
-    age: {
-        type: Map,
-        of:[[[[Number]]]]
-    },
+    },    
+    norms: {
+        type: Object,            
+    },    
     description: {
         type: String,            
     },

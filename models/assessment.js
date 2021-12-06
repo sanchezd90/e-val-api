@@ -1,39 +1,5 @@
 const mongoose = require('mongoose');
 
-const Task = mongoose.Schema({
-    answers: [String],
-    comments: String,
-    score: Number,
-})
-
-const administered_test = mongoose.Schema({
-    test_name: {
-        type: String,
-        require: true,        
-    },
-    version: {
-        type: String,
-        require: true,        
-    },
-    norm_source: {
-        type: String,
-        require: true,        
-    },
-    mean: {
-        type: Number,        
-    },
-    standard_deviation: {
-        type: Number,        
-    },
-    cutoff: {
-        type: Number,        
-    },
-    tasks: {
-        type: Map,
-        of: Task,        
-    },
-})
-
 const assessmentSchema = mongoose.Schema({
     subject_id: {
         type: String,
@@ -61,7 +27,7 @@ const assessmentSchema = mongoose.Schema({
         type: [String],                
     },    
     administered_tests: {
-        type: [administered_test],                
+        type: Array,                
     },    
     ts_create:{
         type: Date,
