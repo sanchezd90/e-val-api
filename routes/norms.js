@@ -11,10 +11,10 @@ router.post('/create',
     ],
     norms.create
 )
-router.get('/all',
+router.get('/get/all',
     norms.getAll
 );
-router.get('/single/:id',
+router.get('/get/single/:id',
     norms.getSingle
 );
 router.post('/update',

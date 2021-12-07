@@ -11,10 +11,10 @@ router.post('/create',
     ],
     assessments.create
 )
-router.get('/all',
+router.get('/get/all',
     assessments.getAll
 );
-router.get('/single/:id',
+router.get('/get/single/:id',
     assessments.getSingle
 );
 router.post('/update',

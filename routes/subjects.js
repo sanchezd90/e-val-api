@@ -17,10 +17,10 @@ router.post('/create',
     ],
     subjects.create
 )
-router.get('/all',
+router.get('/get/all',
     subjects.getAll
 );
-router.get('/single/:id',
+router.get('/get/single/:id',
     subjects.getSingle
 );
 router.post('/update',

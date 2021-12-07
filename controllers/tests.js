@@ -45,6 +45,15 @@ const getSingle = async (req,res) => {
   }
 }
 
+const getNames = async (req,res) => {  
+  try{
+    const all = await Test.find({deleted:"0"},{test_id:1,fullName:1});
+    res.status(200).json(all);
+  }catch(error){
+    res.status(500).json({'error':error});
+  }
+}
+
 const update = async (req,res) => {
   const error = validationResult(req);
   if (!error.isEmpty()) {
@@ -75,4 +84,4 @@ const del = async (req,res) => {
   }    
 } 
 
-module.exports = {create,getAll,getSingle,update,del}
+module.exports = {create,getAll,getSingle,getNames,update,del}

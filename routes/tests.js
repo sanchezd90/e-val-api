@@ -12,11 +12,14 @@ router.post('/create',
     ],
     tests.create
 )
-router.get('/all',        
+router.get('/get/all',        
     tests.getAll
 );
-router.get('/single/:id',
+router.get('/get/single/:id',
     tests.getSingle
+);
+router.get('/get/names',
+    tests.getNames
 );
 router.post('/update',
     auth,

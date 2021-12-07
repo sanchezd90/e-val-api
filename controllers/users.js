@@ -31,7 +31,7 @@ const createUser = async (req,res) => {
         send({
             mail : email, 
             body:
-            `<h1> Welcome to E-val!</h1>
+            `<h1> Welcome to Report!</h1>
             Click <a href="http://${process.env.SERVER_URL}:${process.env.SERVER_PORT}/users/verify/${uid}">here</a> to validate your email account`,
             });        
         jwt.sign(payload,process.env.SECRETA,{
