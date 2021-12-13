@@ -34,7 +34,8 @@ const getAll = async (req,res) => {
 const getSingle = async (req,res) => {
   const test_id = req.params.id;
   try{
-    const test = await Test.findById(test_id);
+    const [test] = await Test.find({test_id:test_id, deleted:"0"});
+    console.log(test)
     if(test.deleted==="0"){
       res.status(200).json(test);
     }else{

@@ -34,7 +34,7 @@ const getAll = async (req,res) => {
 const getSingle = async (req,res) => {
   const norm_id = req.params.id;
   try{
-    const norm = await Norm.findById(norm_id);
+    const [norm] = await Norm.find({norm_id:norm_id, deleted:"0"});
     if(norm.deleted==="0"){
       res.status(200).json(norm);
     }else{
