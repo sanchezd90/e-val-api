@@ -31,8 +31,8 @@ const createUser = async (req,res) => {
         send({
             mail : email, 
             body:
-            `<h1> Welcome to Report!</h1>
-            Click <a href="http://${process.env.SERVER_URL}:${process.env.SERVER_PORT}/users/verify/${uid}">here</a> to validate your email account`,
+            `<h1> Bienvenido a Report!</h1>
+            Hacé click <a href="http://${process.env.NEXT_PUBLIC_API_SERVER_NAME}:${process.env.NEXT_PUBLIC_API_SERVER_PORT}/verify/${uid}">acá</a> para validar tu cuenta de correo y finalizar el registro de usuario.`,
             });        
         jwt.sign(payload,process.env.SECRETA,{
             expiresIn: 3600
