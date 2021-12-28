@@ -50,19 +50,11 @@ const createUser = async (req,res) => {
 const verifyEmail = async(req, res) => {
     const {uid} = req.params;
     console.log(uid);
-    try{
-        const match = await User.find({uid:uid},{_id:1});
-        if (match) {
-            try{
-                const response = await User.replaceOne({_id:response._id['$oid']},{valid_email:true});
-                if (response) {
-                    return res.status(400).json({message : 'User verified'})
-                }
-            } catch (error) {
-                console.log(error);
-                res.status(500).send("email verification error")  
-            }                                   
-        } 
+    try{            
+        const response = await User.updateOne({uid:uid},{valid_email:true});
+        if (response) {
+            return res.status(200).json({message : 'User verified'})
+        }                                                 
     } catch (error) {
         console.log(error);
         res.status(500).send("register error")    

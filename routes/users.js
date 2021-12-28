@@ -20,8 +20,7 @@ router.post('/signin',
     users.authUser
 )
 
-router.post('/verify/:uid',
-    auth,
+router.post('/verify/:uid',    
     users.verifyEmail
 )
 
