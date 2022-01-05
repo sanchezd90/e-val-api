@@ -24,5 +24,14 @@ router.post('/verify/:uid',
     users.verifyEmail
 )
 
+router.post('/login',
+    [        
+        check('email','Provide a valid email address').isEmail(),
+        check('pass','Your password must contain at least 6 characters').isLength({min:6}) 
+
+    ],
+    users.getSingle
+)
+
 module.exports = router;
 
