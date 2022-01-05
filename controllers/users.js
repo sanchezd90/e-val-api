@@ -25,7 +25,9 @@ const createUser = async (req,res) => {
         await user.save()        
         const payload = {
             user:{
-                id: user.id,
+                email:user.email,
+                role:user.role,
+                valid_email:user.valid_email
             }
         }
         send({
@@ -53,7 +55,20 @@ const verifyEmail = async(req, res) => {
     try{            
         const response = await User.updateOne({uid:uid},{valid_email:true});
         if (response) {
-            return res.status(200).json({message : 'User verified'})
+            let [user] = await User.find({uid:uid});
+            const payload = {
+                user:{
+                    email:user.email,
+                    role:user.role,
+                    valid_email:user.valid_email
+                }
+            }
+            jwt.sign(payload,process.env.SECRETA,{
+                expiresIn: 3600
+            }, (error,token) => {
+                if (error) throw error;
+                res.json({token:token});            
+            })
         }                                                 
     } catch (error) {
         console.log(error);
