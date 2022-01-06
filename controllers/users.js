@@ -120,7 +120,7 @@ const authUser = async (req, res) => {
   }
 };
 
-const getSingle = async (req, res) => {
+const login = async (req, res) => {
   const { email, pass } = req.body;  
   try {
     const [user] = await User.find({ email: email });    
@@ -161,4 +161,16 @@ const getSingle = async (req, res) => {
   }
 };
 
-module.exports = { createUser, verifyEmail, authUser, getSingle };
+const getUser = async (req, res) => {
+  const { email } = req.body;  
+  try {
+    const [user] = await User.find({ email: email });    
+    if (user) {    
+      res.json({ user: user });
+    }
+  } catch (error) {
+    res.status(500).json({ error: error });
+  }
+};
+
+module.exports = { createUser, verifyEmail, authUser, login, getUser };

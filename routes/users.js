@@ -30,7 +30,10 @@ router.post('/login',
         check('pass','Your password must contain at least 6 characters').isLength({min:6}) 
 
     ],
-    users.getSingle
+    users.login
+)
+router.post('/get',
+    users.getUser
 )
 
 module.exports = router;
