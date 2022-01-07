@@ -11,6 +11,9 @@ const userSchema = mongoose.Schema({
         trim: true,
         unique:true,
     },
+    country:{
+        type: String,                        
+    },
     uid:{
         type: String,        
     },

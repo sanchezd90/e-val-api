@@ -173,4 +173,16 @@ const getUser = async (req, res) => {
   }
 };
 
-module.exports = { createUser, verifyEmail, authUser, login, getUser };
+const editUser = async (req, res) => {
+  const { email, username, country } = req.body;  
+  try {
+    const response = await User.findOneAndUpdate({ email: email },{username:username,country:country});    
+    if (response) {       
+      res.json({msg:'success'});
+    }
+  } catch (error) {
+    res.status(500).json({ error: error });
+  }
+};
+
+module.exports = { createUser, verifyEmail, authUser, login, getUser, editUser };

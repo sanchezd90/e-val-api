@@ -35,6 +35,9 @@ router.post('/login',
 router.post('/get',
     users.getUser
 )
+router.post('/edit',
+    users.editUser
+)
 
 module.exports = router;
 
