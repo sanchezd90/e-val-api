@@ -18,7 +18,8 @@ app.use(cors(corsOptions))
 
 app.use(express.json({ extended: true }));
 
-const PORT = process.env.SERVER_PORT || 4000
+const PORT = process.env.PORT || 5000
+const HOST = process.env.HOST || '0.0.0.0'
 
 app.use('/api/tests',require('./routes/tests'));
 app.use('/api/norms',require('./routes/norms'));
@@ -27,7 +28,7 @@ app.use('/api/users',require('./routes/users'));
 app.use('/api/subjects',require('./routes/subjects'));
 app.use('/api/auth',require('./routes/auth'));
 
-app.listen(PORT, () => {
+app.listen(PORT, HOST, () => {
     console.log(`Server escuchando en puerto ${PORT}`)
 })
 
