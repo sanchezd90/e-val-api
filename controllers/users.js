@@ -33,7 +33,7 @@ const createUser = async (req, res) => {
     send({
       mail: email,
       body: `<h1> Bienvenido a Report!</h1>
-            Hacé click <a href="http://${process.env.NEXT_PUBLIC_API_SERVER_NAME}:${process.env.NEXT_PUBLIC_API_SERVER_PORT}/verify/${uid}">acá</a> para validar tu cuenta de correo y finalizar el registro de usuario.`,
+            Hacé click <a href="http://${process.env.NEXT_PUBLIC_API_SERVER_URL}/verify/${uid}">acá</a> para validar tu cuenta de correo y finalizar el registro de usuario.`,
     });
     jwt.sign(
       payload,
