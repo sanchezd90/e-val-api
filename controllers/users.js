@@ -8,7 +8,7 @@ const { send } = require("../services/mail");
 const createUser = async (req, res) => {
   const error = validationResult(req);
   if (!error.isEmpty()) {
-    return res.status(400).json({ errores: error.array() });
+    return res.status(400).json({message: 'Invalid data', error:error});
   }
 
   try {
@@ -48,7 +48,7 @@ const createUser = async (req, res) => {
     );
   } catch (error) {
     console.log(error);
-    res.status(500).send("register error");
+    res.status(500).json({message: 'Register error', error:error});
   }
 };
 
@@ -87,7 +87,7 @@ const verifyEmail = async (req, res) => {
 const authUser = async (req, res) => {
   const error = validationResult(req);
   if (!error.isEmpty()) {
-    return res.status(400).json({ errores: error.array() });
+    return res.status(400).json({message: 'Invalid data', error:error});
   }
 
   try {
@@ -116,7 +116,7 @@ const authUser = async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    res.status(500).send("register error");
+    res.status(500).json({ message: "Register error" });
   }
 };
 
@@ -147,17 +147,17 @@ const login = async (req, res) => {
                 }
               );
           } else {
-            res.status(200).json({ msg: "deleted", token: null });
+            res.status(400).json({ message: "User has been deleted", token: null });
           }
         } else {
-          res.status(200).json({ msg: "wrong pass", token: null });
+          res.status(400).json({ message: "Invalid password", token: null });
         }
       });
     } else {
-      res.status(200).json({ msg: "user not found", token: null });
+      res.status(400).json({ message: "User is not registered", token: null });
     }
   } catch (error) {
-    res.status(500).json({ error: error });
+    res.status(500).json({ message: "Login error", error: error });
   }
 };
 
@@ -169,7 +169,7 @@ const getUser = async (req, res) => {
       res.json({ user: user });
     }
   } catch (error) {
-    res.status(500).json({ error: error });
+    res.status(500).json({ message: "getUser error", error: error });
   }
 };
 
@@ -181,7 +181,7 @@ const editUser = async (req, res) => {
       res.json({msg:'success'});
     }
   } catch (error) {
-    res.status(500).json({ error: error });
+    res.status(500).json({ message: "Edit user error", error: error });
   }
 };
 

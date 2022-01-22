@@ -6,7 +6,7 @@ const User = require('../models/user')
 exports.authUser = async (req, res, next) => {
     const err = validationResult(req);
     if(!err.isEmpty){
-        return res.status(400).json({error: err.array()})
+        return res.status(400).json({message: 'Invalid data', error:error})
     }
 
     const {email,pass} = req.body;
@@ -14,12 +14,12 @@ exports.authUser = async (req, res, next) => {
     try{
         let user = await User.findOne({email});
         if(!user){
-            return res.status(400).json({msg: 'User is not registered'});
+            return res.status(400).json({message: 'User is not registered'});
         }
         const passMatch = await bcryptjs.compare(pass,user.pass);
 
         if(!passMatch){
-            return res.status(400).json({msg: 'Invalid password'});
+            return res.status(400).json({message: 'Invalid password'});
         }
 
         const payload = {
