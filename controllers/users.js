@@ -43,7 +43,7 @@ const createUser = async (req, res) => {
       },
       (error, token) => {
         if (error) throw error;
-        res.json({ token: token });
+        res.status(200).json({ token: token });
       }
     );
   } catch (error) {
@@ -74,7 +74,7 @@ const verifyEmail = async (req, res) => {
         },
         (error, token) => {
           if (error) throw error;
-          res.json({ token: token });
+          res.status(200).json({ token: token });
         }
       );
     }
@@ -108,11 +108,11 @@ const authUser = async (req, res) => {
         },
         (error, token) => {
           if (error) throw error;
-          res.json({ token: token });
+          res.status(200).json({ token: token });
         }
       );
     } else {
-      res.json({ message: "Invalid user" });
+      res.status(400).json({ message: "Invalid user" });
     }
   } catch (error) {
     console.log(error);
@@ -143,7 +143,7 @@ const login = async (req, res) => {
                 },
                 (error, token) => {
                   if (error) throw error;
-                  res.json({ msg: "success", token: token });
+                  res.status(200).json({ msg: "success", token: token });
                 }
               );
           } else {
@@ -166,7 +166,7 @@ const getUser = async (req, res) => {
   try {
     const [user] = await User.find({ email: email });    
     if (user) {    
-      res.json({ user: user });
+      res.status(200).json({ user: user });
     }
   } catch (error) {
     res.status(500).json({ message: "getUser error", error: error });
@@ -178,7 +178,7 @@ const editUser = async (req, res) => {
   try {
     const response = await User.findOneAndUpdate({ email: email },{username:username,country:country});    
     if (response) {       
-      res.json({msg:'success'});
+      res.status(200).json({msg:'success'});
     }
   } catch (error) {
     res.status(500).json({ message: "Edit user error", error: error });
