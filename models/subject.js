@@ -16,7 +16,7 @@ const subjectSchema = mongoose.Schema({
         require: true,
         trim: true,        
     },
-    suject_id:{
+    subject_id:{
         type: String,
         require: true,
         trim: true,
@@ -27,7 +27,7 @@ const subjectSchema = mongoose.Schema({
         default: Date.now()
     },
     birth_date:{
-        type: Date,
+        type: String,
         require: true,
     },
     sex:{
