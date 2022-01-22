@@ -40,7 +40,7 @@ const getSingle = async (req,res) => {
     if(subject.deleted==="0"){
       res.status(200).json(subject);
     }else{
-      res.status(200).json({msg:'deleted'});
+      res.status(400).json({msg:'deleted'});
     }
   }catch(error){
     res.status(500).json({'error':error});
