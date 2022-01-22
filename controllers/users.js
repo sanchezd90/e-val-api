@@ -178,7 +178,7 @@ const editUser = async (req, res) => {
   try {
     const response = await User.findOneAndUpdate({ email: email },{username:username,country:country});    
     if (response) {       
-      res.status(200).json({msg:'success'});
+      res.status(200).json({message:'success'});
     }
   } catch (error) {
     res.status(500).json({ message: "Edit user error", error: error });
